@@ -1,3 +1,4 @@
+
 name: Build Mahaboob Online Services APK
 
 on:
@@ -15,17 +16,21 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
+          java-version: '17'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Extract Android project
+        run: unzip -q Mahaboob_Android_Source2.zip -d android-source
 
       - name: Build APK
-        run: gradle assembleDebug
+        run: gradle -p android-source/Mahaboob_Android_Source2/MahaboobOnlineServicesAndroid assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Mahaboob-Online-Services-APK
-          path: app/build/outputs/apk/debug/*.apk
-          
+          path: android-source/Mahaboob_Android_Source2/MahaboobOnlineServicesAndroid/app/build/outputs/apk/debug/*.apk
