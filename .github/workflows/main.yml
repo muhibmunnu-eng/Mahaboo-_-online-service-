@@ -27,7 +27,7 @@ jobs:
         run: unzip -q Mahaboob_Android_Source2.zip -d android-source
 
       - name: Build APK
-        run: gradle -p android-source/Mahaboob_Android_Source2/MahaboobOnlineServicesAndroid assembleDebug
+        run:  gradle -p android-source/Mahaboob_Android_Source2/MahaboobOnlineServicesAndroid assembleDebug -Pkotlin.jvm.target.validation.mode=warning
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
